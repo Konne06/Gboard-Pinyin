@@ -12,13 +12,11 @@ jobs:
     steps:
       - name: zip dict
         run: |
-          ls
-          cd dict
           ls *.txt | while read each; do filename=$(echo $each | cut -d . -f1); zip $filename.zip $each; done
       - uses: ncipollo/release-action@v1.7.3
         with:
           allowUpdates: true
           tag: "packages"
-          artifacts: "./*/*.zip"
+          artifacts: "./*.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
 
