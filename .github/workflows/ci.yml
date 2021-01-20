@@ -15,24 +15,10 @@ jobs:
           ls
           cd dict
           ls *.txt | while read each; do filename=$(echo $each | cut -d . -f1); zip $filename.zip $each; done
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1.7.3
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./*.zip
-          asset_name: gboard dict
-          asset_content_type: application/zip
+          allowUpdates: true
+          tag: "packages"
+          artifacts: "./*/*.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
