@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: zip dict
-        run: | 
+        run: |
+          ls
           cd dict
           ls *.txt | while read each; do filename=$(echo $each | cut -d . -f1); zip $filename.zip $each; done
       - name: Create Release
