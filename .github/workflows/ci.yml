@@ -19,6 +19,6 @@ jobs:
         with:
           allowUpdates: true
           tag: "packages"
-          artifacts: "./*.zip"
+          artifacts: "./*/*.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
 
